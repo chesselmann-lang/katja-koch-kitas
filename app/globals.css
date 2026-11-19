@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-ink font-body antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  [aria-current="page"] {
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Salient-typischer zentrierter Grid-Container mit festen Breakpoint-Gutter */
+  .container-salient {
+    @apply mx-auto max-w-container px-6 sm:px-8 lg:px-8;
+  }
+  .container-narrow {
+    @apply mx-auto max-w-container-narrow px-6;
+  }
+  /* Einheitlicher Section-Rhythmus über alle Breakpoints, Salient-Stil:
+     spürbar mehr Luft auf großen Screens, kompakter auf Mobile. */
+  .section-y {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+  .section-y-sm {
+    @apply py-10 sm:py-14 lg:py-20;
+  }
+  .eyebrow {
+    @apply text-sm font-bold uppercase tracking-wide text-waldgruen;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-waldgruen px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:bg-waldgruen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-waldgruen;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink shadow-sm ring-1 ring-border transition hover:bg-backgroundAlt focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-waldgruen;
+  }
+  .card-salient {
+    @apply rounded-card bg-card shadow-glow ring-1 ring-black/5;
+  }
+  /* Beispieltext-Markierung: sichtbarer, gestrichelter Rahmen + Hinweis-Badge
+     für alle Platzhalterinhalte, die noch durch echte Texte ersetzt werden
+     müssen (Projekt-Konvention: nichts erfinden, aber klar kennzeichnen). */
+  .placeholder-text {
+    @apply relative rounded-md border border-dashed border-terrakotta/50 bg-terrakotta/5 px-1;
+  }
+}
+
+@layer utilities {
+  .bg-grid-blob {
+    background-image: radial-gradient(circle at 35% 35%, currentColor 0%, transparent 70%);
+    opacity: 0.12;
+  }
+}
+
+/* Dezentes Punktraster als Hintergrundtextur (ersetzt lib/theme.ts dotGridPattern
+   als CSS-Utility, damit Tailwind-Klassen statt Inline-SVG-Strings genutzt werden können). */
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(63, 107, 74, 0.14) 1.4px, transparent 1.4px);
+  background-size: 28px 28px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
