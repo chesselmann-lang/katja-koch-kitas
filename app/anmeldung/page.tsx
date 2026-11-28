@@ -4,7 +4,6 @@ import { Suspense, useMemo, useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { colors } from "@/lib/theme";
 import { allKitas } from "@/lib/kitas-data";
-import { supabase } from "@/lib/supabase";
 import Reveal from "@/components/Reveal";
 import Container from "@/components/salient/Container";
 
@@ -75,18 +74,15 @@ function AnmeldungForm() {
 
     setStatus("sending");
 
-    const { error } = await supabase.from("anmeldungen").insert({
-      parent_name: (data.get("parent_name") as string)?.trim(),
-      email: (data.get("email") as string)?.trim(),
-      phone: (data.get("phone") as string)?.trim() || null,
-      gewuenschte_kita: data.get("gewuenschte_kita") as string,
-      geburtsmonat_jahr: (data.get("geburtsmonat_jahr") as string)?.trim(),
-      betreuungsbeginn: (data.get("betreuungsbeginn") as string)?.trim() || null,
-      nachricht: (data.get("nachricht") as string)?.trim() || null,
-    });
-
-    if (error) {
-      console.error("Anmeldung-Insert fehlgeschlagen:", error.message);
+    // Server-Route: geht bei Anbindung direkt in die Kita-App, sonst in die Website-Datenbank
+    let ok = false;
+    try {
+      const res = await fetch("/api/anmeldung", { method: "POST", body: data });
+      ok = res.ok;
+    } catch {
+      ok = false;
+    }
+    if (!ok) {
       setStatus("error");
       return;
     }
@@ -215,6 +211,12 @@ function AnmeldungForm() {
                 />
               </div>
               <div className="grid gap-1.5">
+                <label htmlFor="kind_name" className="text-[13px] text-inkSoft">
+                  Name des Kindes (optional)
+                </label>
+                <input id="kind_name" name="kind_name" autoComplete="off" placeholder="Vor- und Nachname" className={inputClass} />
+              </div>
+              <div className="grid gap-1.5">
                 <label htmlFor="betreuungsbeginn" className="text-[13px] text-inkSoft">
                   Gewünschter Betreuungsbeginn
                 </label>
@@ -264,6 +266,12 @@ function AnmeldungForm() {
                 </label>
                 <textarea id="nachricht" name="nachricht" rows={4} className={`${inputClass} resize-y`} />
               </div>
+              <label className="flex items-start gap-2.5 text-[13px] text-inkSoft">
+                <input type="checkbox" name="einwilligung" value="ja" required={step === 2} className="mt-0.5" />
+                Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage an die gewünschte Kita übermittelt und dort
+                in der Kita-Verwaltung gespeichert werden. Mehr dazu in der{" "}
+                <a href="/datenschutz" className="underline">Datenschutzerklärung</a>.
+              </label>
               <label className="flex items-start gap-2.5 text-[13px] text-inkSoft">
                 <input type="checkbox" required={step === 2} className="mt-0.5" />
                 Ich habe verstanden, dass diese Anfrage unverbindlich ist und keinen Anspruch auf einen

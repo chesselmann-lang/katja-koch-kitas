@@ -1,4 +1,5 @@
 import Link from "next/link";
+import KitaTermine from "./KitaTermine";
 import type { ReactNode } from "react";
 import { dailyRhythmNote, type KitaData } from "@/lib/kitas-data";
 import { colors } from "@/lib/theme";
@@ -490,6 +491,8 @@ export default function KitaPageTemplate({
       </Section>
 
       {/* Kontakt — reine Kontaktangaben, die CTA folgt direkt darunter als eigenes Modul */}
+      <KitaTermine slug={kita.slug} accent={accent} />
+
       <Section id="kontakt" accent={accent}>
         <h2 className="mb-3 text-2xl font-extrabold">Kontakt {kita.shortName}</h2>
         <div className="max-w-[420px] text-[15px] leading-[2] text-inkSoft">

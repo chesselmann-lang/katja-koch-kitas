@@ -60,13 +60,19 @@ export default function DatenschutzPage() {
                 <h2 className="mb-2 text-[17px] font-bold text-ink">5. Kontakt- und Anmeldeformular</h2>
                 <p>
                   Über das Formular auf der Seite „Kita-Platz anfragen&quot; können Sie uns Kontakt- und Angaben zu
-                  Ihrem Kind übermitteln (Name, E-Mail, ggf. Telefonnummer, gewünschte Kita, Geburtsmonat/-jahr des
-                  Kindes, gewünschter Betreuungsbeginn, freiwillige Nachricht). Diese Angaben werden in einer
+                  Ihrem Kind übermitteln (Name, E-Mail, ggf. Telefonnummer, gewünschte Kita, Geburtsmonat/-jahr und
+                  freiwillig Name des Kindes, gewünschter Betreuungsbeginn, freiwillige Nachricht). Diese Angaben werden in einer
                   Datenbank unseres technischen Dienstleisters Supabase (Hosting in der EU) gespeichert und
                   ausschließlich zur Bearbeitung Ihrer Anfrage genutzt (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Ein
                   öffentlicher Lesezugriff auf gespeicherte Anfragen ist technisch ausgeschlossen. Die Daten werden
                   gelöscht, sobald sie für die Bearbeitung Ihrer Anfrage nicht mehr erforderlich sind; die genaue
                   Aufbewahrungsdauer legt die jeweils verantwortliche Trägergesellschaft (siehe Ziffer 1) fest.
+                </p>
+                <p className="mt-2">
+                  Nutzt die gewünschte Kita die digitale Kita-Verwaltung, wird Ihre Anfrage mit Ihrer Einwilligung
+                  (Art. 6 Abs. 1 lit. a DSGVO) direkt dorthin übermittelt und im Bereich „Aufnahme &amp; Warteliste“ der Kita
+                  bearbeitet; die Kita-Verwaltung wird im Auftrag des jeweiligen Trägers betrieben (Auftragsverarbeitung,
+                  Server in der EU). Sie können Ihre Einwilligung jederzeit gegenüber der Kita widerrufen.
                 </p>
               </section>
 
